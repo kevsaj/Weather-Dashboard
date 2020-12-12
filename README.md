@@ -8,7 +8,7 @@ This is my README for Assignment 6
 * [Credits](#Credits)
 * [License](#License)
 
-Page is live: [HERE](https://kevsaj.github.io/Work-Day-Scheduler/.)
+Page is live: [HERE](https://kevsaj.github.io/Weather-Dashboard/)
 
 ![Should Look like this lol](/Assets/06-server-side-apis-homework-demo.png "demo")
 

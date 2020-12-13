@@ -13,11 +13,11 @@ let windSpeedEl = $(".windSpeed");
 let uvIndexEl = $(".uvIndex");
 
 var today = new Date();
-let dd = String(today.getDate()).padStart(2, '0');
-let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+let day = String(today.getDate()).padStart("", '0');
+let month = String(today.getMonth() + 1).padStart("", '0');
 let yyyy = today.getFullYear();
 
-var today = mm + '/' + dd + '/' + yyyy;
+var today = month + '/' + day + '/' + yyyy;
 
 
 searchBtn.on("click", function (e) {
@@ -50,20 +50,16 @@ function weatherData(cityValue) {
                 cityTemp: weatherData.main.temp,
                 cityHumidity: weatherData.main.humidity,
                 cityWindSpeed: weatherData.wind.speed,
-                cityUVIndex: weatherData.coord,
-                cityWeatherIconName: weatherData.weather[0].icon
             }
             renderWeatherData(cityObj.cityName, cityObj.cityTemp, cityObj.cityHumidity, cityObj.cityWindSpeed)
         })
 
 };
 
-function renderWeatherData(cityName, cityTemp, cityHumidity, cityWindSpeed, cityWeatherIcon, uvVal) {
+function renderWeatherData(cityName, cityTemp, cityHumidity, cityWindSpeed) {
     cityNameEl.text(cityName)
-    currentDateEl.text(`(${today})`)
-    tempEl.text(`Temperature: ${cityTemp} °F`);
+    currentDateEl.text(`Today is: ${today}`)
+    tempEl.text(`Temperature: ${cityTemp} °C`);
     humidityEl.text(`Humidity: ${cityHumidity}%`);
     windSpeedEl.text(`Wind Speed: ${cityWindSpeed} MPH`);
-    uvIndexEl.text(`UV Index: ${uvVal}`);
-    weatherIconEl.attr("src", cityWeatherIcon);
 }

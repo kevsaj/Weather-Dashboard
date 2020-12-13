@@ -1,6 +1,6 @@
 let apiKey = "05bd22fc37c53d0b90b077b1aa4f078e";
 let searchBtn = $(".searchBtn");
-let yo = $(".yo");
+let cityValue = $(".cityValue");
 let searchInput = $(".searchInput");
 let searchHistory = [];
 
@@ -22,48 +22,48 @@ var today = mm + '/' + dd + '/' + yyyy;
 
 searchBtn.on("click", function (e) {
     e.preventDefault();
-
-    let citySearchValue = searchInput.val();
-    let queryUrl = `https://api.openweathermap.org/data/2.5/weather?q=${citySearchValue}&APPID=${apiKey}&units=imperial`;
-    $.ajax({
-            url: queryUrl,
-            method: "GET"
-        })
-        .then(function (weatherData) {
-            console.log(weatherData);
-            let cityObj = {
-                cityName: weatherData.name,
-                cityTemp: weatherData.main.temp,
-                cityHumidity: weatherData.main.humidity,
-                cityWindSpeed: weatherData.wind.speed
-            }
-            renderWeatherData(cityObj.cityName, cityObj.cityTemp, cityObj.cityHumidity, cityObj.cityWindSpeed)
-        });
+    if (searchInput.val() === "") {
+        alert("You must enter a city");
+        return;
+    }
+    console.log("clicked button")
+    console.log(searchInput)
+    weatherData(searchInput.val());
 });
 
-function cityValue() {
-    var x = document.getElementById("myBtn").value;
-    console.log(x);
-}
+$(document).on("click", ".cityValue", function () {
+    console.log("clicked cityValue item")
+    let thisElement = $(this);
+    weatherData(thisElement.text());
+})
 
-yo.on("click", function (e) {
-    e.preventDefault();
-
-    let cityValue = x;
+function weatherData(cityValue) {
+    console.log(cityValue);
     let queryUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityValue}&APPID=${apiKey}&units=imperial`;
     $.ajax({
             url: queryUrl,
             method: "GET"
         })
         .then(function (weatherData) {
-            console.log(weatherData);
             let cityObj = {
                 cityName: weatherData.name,
                 cityTemp: weatherData.main.temp,
                 cityHumidity: weatherData.main.humidity,
-                cityWindSpeed: weatherData.wind.speed
+                cityWindSpeed: weatherData.wind.speed,
+                cityUVIndex: weatherData.coord,
+                cityWeatherIconName: weatherData.weather[0].icon
             }
             renderWeatherData(cityObj.cityName, cityObj.cityTemp, cityObj.cityHumidity, cityObj.cityWindSpeed)
-        });
-});
+        })
 
+};
+
+function renderWeatherData(cityName, cityTemp, cityHumidity, cityWindSpeed, cityWeatherIcon, uvVal) {
+    cityNameEl.text(cityName)
+    currentDateEl.text(`(${today})`)
+    tempEl.text(`Temperature: ${cityTemp} °F`);
+    humidityEl.text(`Humidity: ${cityHumidity}%`);
+    windSpeedEl.text(`Wind Speed: ${cityWindSpeed} MPH`);
+    uvIndexEl.text(`UV Index: ${uvVal}`);
+    weatherIconEl.attr("src", cityWeatherIcon);
+}

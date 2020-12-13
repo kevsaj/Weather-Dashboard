@@ -20,6 +20,7 @@ button{
 
 button:hover {
     background-color: #feca57;
+    color: white;
 }
 
 button:focus {
@@ -30,7 +31,7 @@ button:focus {
 .container {
     display: flex;
     flex-direction: row;
-    max-width: 640px;
+    max-width: 330px;
     height: 100%;
 }
 
@@ -42,3 +43,20 @@ section {
 section h1 {
     line-height: 30px;
 }
+
+.btn-group button {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    padding: auto;
+    cursor: pointer;
+    width: 70%;
+    display: block;
+  }
+  
+  
+  /* Add a background color on hover */
+  .btn-group button:hover {
+    background-color: purple;
+    color: white;
+  }

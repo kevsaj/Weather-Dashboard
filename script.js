@@ -1,5 +1,6 @@
 let apiKey = "05bd22fc37c53d0b90b077b1aa4f078e";
 let searchBtn = $(".searchBtn");
+let yo = $(".yo");
 let searchInput = $(".searchInput");
 let searchHistory = [];
 
@@ -39,3 +40,30 @@ searchBtn.on("click", function (e) {
             renderWeatherData(cityObj.cityName, cityObj.cityTemp, cityObj.cityHumidity, cityObj.cityWindSpeed)
         });
 });
+
+function cityValue() {
+    var x = document.getElementById("myBtn").value;
+    console.log(x);
+}
+
+yo.on("click", function (e) {
+    e.preventDefault();
+
+    let cityValue = x;
+    let queryUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityValue}&APPID=${apiKey}&units=imperial`;
+    $.ajax({
+            url: queryUrl,
+            method: "GET"
+        })
+        .then(function (weatherData) {
+            console.log(weatherData);
+            let cityObj = {
+                cityName: weatherData.name,
+                cityTemp: weatherData.main.temp,
+                cityHumidity: weatherData.main.humidity,
+                cityWindSpeed: weatherData.wind.speed
+            }
+            renderWeatherData(cityObj.cityName, cityObj.cityTemp, cityObj.cityHumidity, cityObj.cityWindSpeed)
+        });
+});
+

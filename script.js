@@ -2,7 +2,7 @@ let apiKey = "05bd22fc37c53d0b90b077b1aa4f078e";
 let searchBtn = $(".searchBtn");
 let cityValue = $(".cityValue");
 let searchInput = $(".searchInput");
-let searchHistory = [];
+let searchHistoryEl = []
 
 let cityNameEl = $(".cityName");
 let currentDateEl = $(".currentDate");
@@ -30,6 +30,9 @@ searchBtn.on("click", function (e) {
     console.log("clicked button")
     console.log(searchInput)
     weatherData(searchInput.val());
+
+    //stores all Searched Cities - Persistent data
+    localStorage.setItem("Interested city: ", searchInput.val());
 });
 
 $(document).on("click", ".cityValue", function () {

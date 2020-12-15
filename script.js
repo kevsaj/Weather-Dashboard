@@ -8,6 +8,7 @@ let cityNameEl = $(".cityName");
 let currentDateEl = $(".currentDate");
 let weatherIconEl = $(".weatherIcon")
 let tempEl = $(".temp");
+let feelLike = $(".feel")
 let humidityEl = $(".humidity");
 let windSpeedEl = $(".windSpeed");
 let uvIndexEl = $(".uvIndex");
@@ -48,18 +49,20 @@ function weatherData(cityValue) {
             let cityObj = {
                 cityName: weatherData.name,
                 cityTemp: weatherData.main.temp,
+                cityFeel: weatherData.main.feels_like,
                 cityHumidity: weatherData.main.humidity,
                 cityWindSpeed: weatherData.wind.speed,
             }
-            renderWeatherData(cityObj.cityName, cityObj.cityTemp, cityObj.cityHumidity, cityObj.cityWindSpeed)
+            renderWeatherData(cityObj.cityName, cityObj.cityTemp, cityObj.cityFeel, cityObj.cityHumidity, cityObj.cityWindSpeed)
         })
 
 };
 
-function renderWeatherData(cityName, cityTemp, cityHumidity, cityWindSpeed) {
+function renderWeatherData(cityName, cityTemp, cityFeel, cityHumidity, cityWindSpeed) {
     cityNameEl.text(cityName)
     currentDateEl.text(`Today is: ${today}`)
     tempEl.text(`Temperature: ${cityTemp} °C`);
+    feelLike.text(`Temperature feels like: ${cityFeel} °C`);
     humidityEl.text(`Humidity: ${cityHumidity}%`);
     windSpeedEl.text(`Wind Speed: ${cityWindSpeed} MPH`);
 }
